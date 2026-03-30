@@ -1,6 +1,7 @@
 import './App.css'
 import NavBar from './components/NavBar/NavBar';
 import Banner from './components/Banner/Banner';
+import State from './components/State/State';
 
 
 
@@ -8,12 +9,15 @@ function App() {
 
   return (
     <>
-      <nav>
+      <header>
         <NavBar></NavBar>
-      </nav>
-      <section>
         <Banner></Banner>
-      </section>
+      </header>
+
+      <main>
+        <State></State>
+      </main>
+
     </>
   )
 }
