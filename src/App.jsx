@@ -1,15 +1,16 @@
+import { useState } from 'react';
 import './App.css'
-import NavBar from './components/Navbar/NavBar'
+import NavBar from './components/NavBar/NavBar';
+
 
 
 function App() {
-
+  const [cart, setCart] = useState([]);
 
   return (
     <>
       <nav>
-        <h1>hellp</h1>
-
+        <NavBar cart={cart}></NavBar>
       </nav>
     </>
   )
