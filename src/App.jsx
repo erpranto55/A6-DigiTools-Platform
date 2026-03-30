@@ -1,17 +1,19 @@
-import { useState } from 'react';
 import './App.css'
 import NavBar from './components/NavBar/NavBar';
+import Banner from './components/Banner/Banner';
 
 
 
 function App() {
-  const [cart, setCart] = useState([]);
 
   return (
     <>
       <nav>
-        <NavBar cart={cart}></NavBar>
+        <NavBar></NavBar>
       </nav>
+      <section>
+        <Banner></Banner>
+      </section>
     </>
   )
 }

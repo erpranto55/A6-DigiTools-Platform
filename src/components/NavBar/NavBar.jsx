@@ -1,13 +1,12 @@
 import { Pointer, ShoppingCart } from 'lucide-react';
 import React from 'react';
 
-const NavBar = ({ cart }) => {
-    const total = cart.reduce((sum, item) => sum + item.price, 0);
+const NavBar = () => {
     return (
         <div className="navbar bg-base-100 shadow-md px-50 flex justify-between items-center py-4">
 
-            <div className="">
-                <h1 className="text-2xl font-bold text-purple-600 ">
+            <div>
+                <h1 className="text-4xl font-bold bg-linear-to-r from-[#4F39F6] to-[#9514FA] bg-clip-text text-transparent">
                     DigiTools
                 </h1>
             </div>
@@ -31,10 +30,9 @@ const NavBar = ({ cart }) => {
                     Login
                 </button>
 
-                <button className="btn bg-purple-600 text-white rounded-full px-5 hover:bg-purple-700">
+                <button className="text-white rounded-full px-6 py-2 bg-linear-to-r from-[#4F39F6] to-[#9514FA] hover:from-[#3b2be0] hover:to-[#7e10d6] hover:scale-105 transition-all duration-300">
                     Get Started
                 </button>
-
             </div>
         </div>
     );
