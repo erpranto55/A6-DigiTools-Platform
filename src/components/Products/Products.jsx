@@ -38,26 +38,36 @@ const Products = ({ cart, setCart }) => {
                     to boost your productivity and creativity.
                 </p>
 
-                <div className="flex justify-center gap-3 mt-5">
-                    <button
-                        onClick={() => setActiveTab("products")}
-                        className={`btn rounded-full px-5 ${activeTab === "products"
-                            ? "text-white rounded-full px-6 py-2 bg-linear-to-r from-[#4F39F6] to-[#9514FA] hover:from-[#3b2be0] hover:to-[#7e10d6] hover:scale-105 transition-all duration-300"
-                            : "btn-outline"
-                            }`}
-                    >
-                        Products
-                    </button>
+                <div className="flex justify-center mt-6">
 
-                    <button
-                        onClick={() => setActiveTab("cart")}
-                        className={`btn rounded-full px-5 ${activeTab === "cart"
-                            ? "text-white rounded-full px-6 py-2 bg-linear-to-r from-[#4F39F6] to-[#9514FA] hover:from-[#3b2be0] hover:to-[#7e10d6] hover:scale-105 transition-all duration-300"
-                            : "btn-outline"
-                            }`}
-                    >
-                        Cart ({cart.length})
-                    </button>
+                    {/* Outer box */}
+                    <div className="flex items-center bg-gray-100 rounded-full p-1 shadow-inner">
+
+                        {/* Products */}
+                        <button
+                            onClick={() => setActiveTab("products")}
+                            className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300
+                                        ${activeTab === "products"
+                                    ? "text-white bg-linear-to-r from-[#4F39F6] to-[#9514FA] shadow-md hover:scale-105 hover:from-[#3b2be0] hover:to-[#7e10d6]"
+                                    : "text-gray-600 hover:text-purple-600"
+                                }`}
+                        >
+                            Products
+                        </button>
+
+                        {/* Cart */}
+                        <button
+                            onClick={() => setActiveTab("cart")}
+                            className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300
+                                        ${activeTab === "cart"
+                                    ? "text-white bg-linear-to-r from-[#4F39F6] to-[#9514FA] shadow-md hover:scale-105 hover:from-[#3b2be0] hover:to-[#7e10d6]"
+                                    : "text-gray-600 hover:text-purple-600"
+                                }`}
+                        >
+                            Cart ({cart.length})
+                        </button>
+
+                    </div>
                 </div>
             </div>
 
