@@ -1,0 +1,177 @@
+import React from 'react';
+import { useEffect, useState } from "react";
+
+
+const Products = ({ cart, setCart }) => {
+    const [products, setProducts] = useState([]);
+    const [activeTab, setActiveTab] = useState("products");
+
+    useEffect(() => {
+        fetch("/products.json")
+            .then(res => res.json())
+            .then(data => setProducts(data));
+    }, []);
+
+    const handleAddToCart = (product) => {
+        setCart([...cart, product]);
+    };
+
+    const handleRemoveFromCart = (index) => {
+        const updatedCart = cart.filter((_, i) => i !== index);
+        setCart(updatedCart);
+    };
+
+    const handleCheckout = () => {
+        setCart([]);
+    };
+
+    return (
+        <div className="px-24 py-20 max-w-[80%] mx-auto">
+
+            <div className="text-center mb-10">
+                <h2 className="text-3xl font-bold mb-2">
+                    Premium Digital Tools
+                </h2>
+
+                <p className="text-gray-500 mt-2 max-w-xl mx-auto">
+                    Choose from our curated collection of premium digital products designed
+                    to boost your productivity and creativity.
+                </p>
+
+                <div className="flex justify-center gap-3 mt-5">
+                    <button
+                        onClick={() => setActiveTab("products")}
+                        className={`btn rounded-full px-5 ${activeTab === "products"
+                            ? "text-white rounded-full px-6 py-2 bg-linear-to-r from-[#4F39F6] to-[#9514FA] hover:from-[#3b2be0] hover:to-[#7e10d6] hover:scale-105 transition-all duration-300"
+                            : "btn-outline"
+                            }`}
+                    >
+                        Products
+                    </button>
+
+                    <button
+                        onClick={() => setActiveTab("cart")}
+                        className={`btn rounded-full px-5 ${activeTab === "cart"
+                            ? "text-white rounded-full px-6 py-2 bg-linear-to-r from-[#4F39F6] to-[#9514FA] hover:from-[#3b2be0] hover:to-[#7e10d6] hover:scale-105 transition-all duration-300"
+                            : "btn-outline"
+                            }`}
+                    >
+                        Cart ({cart.length})
+                    </button>
+                </div>
+            </div>
+
+            {activeTab === "products" ? (
+                <div className="grid md:grid-cols-3 gap-8 mt-10">
+                    {products.map(product => (
+                        <div
+                            key={product.id}
+                            className="bg-white rounded-2xl p-6 border border-gray-100 shadow-sm hover:shadow-xl transition-all duration-300"
+                        >
+
+                            <div className="flex justify-between items-start mb-4">
+                                <div className="w-12 h-12 rounded-full bg-gray-100 flex items-center justify-center">
+                                    <img
+                                        src={`/products/${product.icon}`}
+                                        className="w-6 h-6"
+                                    />
+                                </div>
+
+                                <span
+                                    className={`text-xs px-3 py-1 rounded-full font-medium
+                                                ${product.tag === "Best Seller" && "bg-yellow-100 text-yellow-600"}
+                                                ${product.tag === "Popular" && "bg-purple-100 text-purple-600"}
+                                                ${product.tag === "New" && "bg-green-100 text-green-600"}
+                                              `}
+                                >
+                                    {product.tag}
+                                </span>
+                            </div>
+
+                            <h3 className="font-semibold text-lg">
+                                {product.name}
+                            </h3>
+
+                            <p className="text-sm text-gray-500 mt-1">
+                                {product.description}
+                            </p>
+
+                            <p className="font-bold text-lg mt-3">
+                                ${product.price}
+                                <span className="text-sm text-gray-400 ml-1">
+                                    /{product.period}
+                                </span>
+                            </p>
+
+                            <ul className="text-sm mt-3 space-y-1 text-gray-600">
+                                {product.features.map((f, i) => (
+                                    <li key={i} className="flex items-center gap-2">
+                                        <span className="text-green-500">✔</span>
+                                        {f}
+                                    </li>
+                                ))}
+                            </ul>
+
+                            <button
+                                onClick={() => handleAddToCart(product)}
+                                className="mt-5 w-full py-2 rounded-full text-white bg-linear-to-r from-[#4F39F6] to-[#9514FA] hover:from-[#3b2be0] hover:to-[#7e10d6] hover:scale-105 transition-all duration-300"
+                            >
+                                Buy Now
+                            </button>
+                        </div>
+                    ))}
+                </div>
+            ) : (
+                <div className="max-w-2xl mx-auto border rounded-xl p-6 shadow mt-10">
+                    <h3 className="font-bold mb-4">Your Cart</h3>
+
+                    {cart.length === 0 ? (
+                        <p className="text-gray-500">Cart is empty</p>
+                    ) : (
+                        <>
+                            {cart.map((item, index) => (
+                                <div key={index} className="flex justify-between items-center mb-3">
+                                    <div className="flex items-center gap-3">
+                                        <img
+                                            src={`/products/${item.icon}`}
+                                            className="w-10 h-10"
+                                        />
+                                        <div>
+                                            <p className="font-medium">{item.name}</p>
+                                            <p className="text-sm text-gray-500">${item.price}</p>
+                                        </div>
+                                    </div>
+
+                                    <button
+                                        onClick={() => handleRemoveFromCart(index)}
+                                        className="text-red-500 text-sm hover:underline"
+                                    >
+                                        Remove
+                                    </button>
+                                </div>
+                            ))}
+
+                            {/* Total */}
+                            <div className="flex justify-between mt-4 font-bold">
+                                <span>Total:</span>
+                                <span>
+                                    $
+                                    {cart.reduce((sum, item) => sum + item.price, 0)}
+                                </span>
+                            </div>
+
+                            <button
+                                onClick={handleCheckout}
+                                className="mt-4 w-full py-2 rounded-full bg-linear-to-r from-[#4F39F6] to-[#9514FA] 
+                                hover:from-[#3b2be0] hover:to-[#7e10d6]transition-all duration-300">
+                                Proceed To Checkout
+                            </button>
+                        </>
+                    )}
+                </div>
+            )}
+        </div>
+    );
+};
+
+export default Products;
