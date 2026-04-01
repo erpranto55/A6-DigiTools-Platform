@@ -1,7 +1,7 @@
 import { Pointer, ShoppingCart } from 'lucide-react';
 import React from 'react';
 
-const NavBar = () => {
+const NavBar = ({ cart }) => {
     return (
         <div className="navbar bg-base-100 shadow-md px-50 flex justify-between items-center py-4">
 
@@ -22,8 +22,11 @@ const NavBar = () => {
             </div>
 
             <div className="flex items-center gap-3">
-                <div className='cursor-pointer'>
+                <div className='relative cursor-pointer'>
                     <ShoppingCart className="w-5 h-5" />
+                    <span className="absolute -top-2 -right-2 bg-red-500 text-white text-xs px-1 rounded-full">
+                        {cart.length}
+                    </span>
                 </div>
 
                 <button className="btn btn-ghost hidden md:inline cursor-pointer hover:text-blue-500 hover:font-bold" >

@@ -1,10 +1,12 @@
+import { Check } from 'lucide-react';
 import React from 'react';
 import { useEffect, useState } from "react";
-
+import { toast } from 'react-toastify';
 
 const Products = ({ cart, setCart }) => {
     const [products, setProducts] = useState([]);
     const [activeTab, setActiveTab] = useState("products");
+    const [addedItems, setAddedItems] = useState([]);
 
     useEffect(() => {
         fetch("/products.json")
@@ -13,16 +15,39 @@ const Products = ({ cart, setCart }) => {
     }, []);
 
     const handleAddToCart = (product) => {
-        setCart([...cart, product]);
+        const exists = cart.find(item => item.id === product.id);
+
+        if (!exists) {
+            setCart([...cart, product]);
+            setAddedItems([...addedItems, product.id]);
+
+            toast.success("Added to cart!", {
+                position: "top-right",
+                autoClose: 1500,
+            });
+        } else {
+            toast.warning("Already added!", {
+                position: "top-right",
+                autoClose: 1500,
+            });
+        }
     };
 
     const handleRemoveFromCart = (index) => {
         const updatedCart = cart.filter((_, i) => i !== index);
         setCart(updatedCart);
-    };
+        toast.error("Removed from cart!", {
+            position: "top-right",
+            autoClose: 1500,
+        });
+    }
 
     const handleCheckout = () => {
         setCart([]);
+        toast.info("Checkout successful!", {
+            position: "top-right",
+            autoClose: 1500,
+        });
     };
 
     return (
@@ -123,10 +148,21 @@ const Products = ({ cart, setCart }) => {
                             </ul>
 
                             <button
+                                disabled={addedItems.includes(product.id)}
                                 onClick={() => handleAddToCart(product)}
-                                className="mt-5 w-full py-2 rounded-full text-white bg-linear-to-r from-[#4F39F6] to-[#9514FA] hover:from-[#3b2be0] hover:to-[#7e10d6] hover:scale-105 transition-all duration-300"
+                                className={`mt-5 w-full rounded-full transition-all duration-300
+                                        ${addedItems.includes(product.id)
+                                        ? "flex items-center justify-center gap-2 px-6 py-2 rounded-full bg-purple-600 text-white cursor-not-allowed"
+                                        : "flex items-center justify-center gap-2 px-6 py-2 rounded-full border border-purple-600 text-purple-600 hover:bg-purple-600 hover:text-white hover:scale-105"
+                                    }`}
                             >
-                                Buy Now
+                                {addedItems.includes(product.id) ? (
+                                    <>
+                                        <Check className="w-4 h-4" /> Added
+                                    </>
+                                ) : (
+                                    "Buy Now"
+                                )}
                             </button>
                         </div>
                     ))}

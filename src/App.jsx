@@ -8,14 +8,15 @@ import Steps from './components/Steps/Steps';
 import Pricing from './components/Pricing/Pricing';
 import Ready from './components/Ready/Ready';
 import Footer from './components/Footer/Footer';
-
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
   const [cart, setCart] = useState([]);
   return (
     <>
       <header>
-        <NavBar></NavBar>
+        <NavBar cart={cart}></NavBar>
         <Banner></Banner>
       </header>
 
@@ -26,9 +27,12 @@ function App() {
         <Pricing></Pricing>
         <Ready></Ready>
       </main>
+
       <footer>
         <Footer></Footer>
       </footer>
+      
+      <ToastContainer />
     </>
   )
 }
