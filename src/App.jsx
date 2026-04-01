@@ -5,6 +5,7 @@ import State from './components/State/State';
 import Products from './components/Products/Products';
 import { useState } from 'react';
 import Steps from './components/Steps/Steps';
+import Pricing from './components/Pricing/Pricing';
 
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
         <State></State>
         <Products cart={cart} setCart={setCart}></Products>
         <Steps></Steps>
+        <Pricing></Pricing>
       </main>
 
     </>
