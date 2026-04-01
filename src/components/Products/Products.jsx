@@ -51,7 +51,7 @@ const Products = ({ cart, setCart }) => {
     };
 
     return (
-        <div className="px-24 py-20 max-w-[80%] mx-auto">
+        <div className="px-5 md:px-10 lg:px-20 py-16 max-w-7xl mx-auto">
 
             <div className="text-center mb-10">
                 <h2 className="text-3xl font-bold mb-2">
@@ -65,10 +65,8 @@ const Products = ({ cart, setCart }) => {
 
                 <div className="flex justify-center mt-6">
 
-                    {/* Outer box */}
                     <div className="flex items-center bg-gray-100 rounded-full p-1 shadow-inner">
 
-                        {/* Products */}
                         <button
                             onClick={() => setActiveTab("products")}
                             className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300
@@ -80,7 +78,6 @@ const Products = ({ cart, setCart }) => {
                             Products
                         </button>
 
-                        {/* Cart */}
                         <button
                             onClick={() => setActiveTab("cart")}
                             className={`px-6 py-2 rounded-full text-sm font-medium transition-all duration-300
