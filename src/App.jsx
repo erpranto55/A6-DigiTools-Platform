@@ -7,6 +7,7 @@ import { useState } from 'react';
 import Steps from './components/Steps/Steps';
 import Pricing from './components/Pricing/Pricing';
 import Ready from './components/Ready/Ready';
+import Footer from './components/Footer/Footer';
 
 
 function App() {
@@ -25,7 +26,9 @@ function App() {
         <Pricing></Pricing>
         <Ready></Ready>
       </main>
-
+      <footer>
+        <Footer></Footer>
+      </footer>
     </>
   )
 }

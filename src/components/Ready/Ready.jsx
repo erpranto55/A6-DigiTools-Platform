@@ -11,7 +11,7 @@ const Ready = () => {
                 </h2>
 
                 <p className="text-purple-200 mt-4">
-                    Join thousands of professionals who are already using Digi-tools to work smarter.
+                    Join thousands of professionals who are already using Digitools to work smarter.
                     <br />
                     Start your free trial today.
                 </p>
